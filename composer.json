@@ -1,0 +1,17 @@
+{
+    "name": "fazlali/laravel-setting",
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "authors": [
+        {
+            "name": "Amin Fazlali",
+            "email": "amin@fazlali.net"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Fazlali\\Setting\\": "src"
+        }
+    }
+}
