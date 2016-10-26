@@ -13,8 +13,14 @@ class Setting
 {
     public function set($key, $value)
     {
-        \DB::table('settings')->updateOrCreate(compact('key'), compact('value'));
-        return $value;
+        $value = serialize($value);
+        if(! $setting = \DB::table('settings')->where(compact('key'))->first()){
+           \DB::table('settings')->insert(compact('key', 'value'));
+        }
+        else{
+           \DB::table('settings')->where(compact('key'))->update(compact('value'));
+        }
+        return unserialize($value);
     }
 
     public function get($key, $default = null)
@@ -22,7 +28,7 @@ class Setting
         if(! $setting = \DB::table('settings')->where(compact('key'))->first()){
             return config($key, $default);
         }
-        return $setting->value;
+        return unserialize($setting->value);
 
     }
 }
